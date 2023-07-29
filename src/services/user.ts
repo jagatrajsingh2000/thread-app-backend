@@ -54,5 +54,11 @@ class UserService {
         const token = JWT.sign({id:user.id, email: user.email},JWT_SECRET)
         return token
     }
+    public static getUserById(id:string) {
+        return PrismaClient.user.findUnique({where: {id}})
+    }
+    public static decodeJWTToken(token: string) {
+        return JWT.verify(token, JWT_SECRET);
+      }
 }
 export default UserService
